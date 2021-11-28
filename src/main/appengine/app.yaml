@@ -1,0 +1,3 @@
+runtime: java11
+service: default #Since it's the first deployment on the GCP project default is required
+instance_class: F2

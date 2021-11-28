@@ -2,6 +2,7 @@ package nl.codecentric.xmascodechallenge.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import nl.codecentric.xmascodechallenge.shared.BufferedImageUtil;
 import nl.codecentric.xmascodechallenge.shared.CustomColor;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +31,8 @@ public class ChristmasDecoderService {
      * @return the decoded text
      */
     public String decodeChristmas(byte[] input, byte[] mask) throws IOException {
-        BufferedImage bufferedInput = getBufferedImage(input);
-        BufferedImage bufferedMask = getBufferedImage(mask);
+        BufferedImage bufferedInput = BufferedImageUtil.toBufferedImage(input);
+        BufferedImage bufferedMask = BufferedImageUtil.toBufferedImage(mask);
 
         StringBuilder output = new StringBuilder();
 
@@ -76,13 +77,5 @@ public class ChristmasDecoderService {
      */
     private boolean containsDecodedASCII(int ASCIIValue) {
         return ASCIIValue != 0;
-    }
-
-    /**
-     * Turn the image back into an byte array
-     */
-    private BufferedImage getBufferedImage(byte[] image) throws IOException {
-        InputStream is = new ByteArrayInputStream(image);
-        return ImageIO.read(is);
     }
 }

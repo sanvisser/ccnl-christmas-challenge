@@ -2,6 +2,7 @@ package nl.codecentric.xmascodechallenge.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import nl.codecentric.xmascodechallenge.shared.BufferedImageUtil;
 import nl.codecentric.xmascodechallenge.shared.CustomColor;
 import nl.codecentric.xmascodechallenge.shared.Partition;
 import nl.codecentric.xmascodechallenge.shared.StringUtil;
@@ -60,7 +61,7 @@ public class ChristmasEncoderService {
             }
         }
 
-        return toByteArray(baseImage);
+        return BufferedImageUtil.toByteArray(baseImage);
     }
 
     /**
@@ -122,14 +123,5 @@ public class ChristmasEncoderService {
     private Partition<Integer> getInputPartitions(String input, int partitionSize) {
         List<Integer> asciiCodes = StringUtil.toAsciiList(input);
         return Partition.ofSize(asciiCodes, partitionSize);
-    }
-
-    /**
-     * Convert the image into a byte array
-     */
-    private byte[] toByteArray(BufferedImage newBi) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(newBi, "png", baos); //we need to be lossless!
-        return baos.toByteArray();
     }
 }

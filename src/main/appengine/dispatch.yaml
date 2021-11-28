@@ -1,0 +1,3 @@
+dispatch:
+  - url: "codecentric-christmas.sandfish.io/*"
+    service: default

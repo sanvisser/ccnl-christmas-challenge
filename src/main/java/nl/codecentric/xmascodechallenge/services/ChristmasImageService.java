@@ -7,6 +7,7 @@ import nl.codecentric.xmascodechallenge.domain.Firewood;
 import nl.codecentric.xmascodechallenge.domain.Logo;
 import nl.codecentric.xmascodechallenge.domain.Rug;
 import nl.codecentric.xmascodechallenge.domain.Sock;
+import nl.codecentric.xmascodechallenge.shared.BufferedImageUtil;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -26,21 +27,13 @@ import java.io.InputStream;
 @Slf4j
 public class ChristmasImageService {
 
-    private static final String CHRISTMAS_IMAGE_PNG = "christmasImage.png";
-    private static final String PNG = "png";
     private static final int WIDTH = 700;
     private static final int HEIGHT = 520;
 
     public byte[] getChristmasImage() throws IOException {
         BufferedImage bufferedImage = createImage();
 
-        // Save as PNG
-        File file = new File(CHRISTMAS_IMAGE_PNG);
-        ImageIO.write(bufferedImage, PNG, file);
-        InputStream in = new FileInputStream(file);
-        byte[] bytes = in.readAllBytes();
-        in.close();
-        return bytes;
+        return BufferedImageUtil.toByteArray(bufferedImage);
     }
 
     public BufferedImage createImage() {
